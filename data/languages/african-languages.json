@@ -1,0 +1,135 @@
+{
+  "languages": [
+    {
+      "code": "en",
+      "name": "English",
+      "nativeName": "English",
+      "region": "West Africa",
+      "countries": ["Nigeria", "Ghana", "Kenya", "South Africa", "Uganda", "Tanzania"],
+      "script": "Latin",
+      "direction": "ltr"
+    },
+    {
+      "code": "fr",
+      "name": "French",
+      "nativeName": "Français",
+      "region": "West Africa",
+      "countries": ["Senegal", "Côte d'Ivoire", "Mali", "Burkina Faso", "Niger", "Chad"],
+      "script": "Latin",
+      "direction": "ltr"
+    },
+    {
+      "code": "ar",
+      "name": "Arabic",
+      "nativeName": "العربية",
+      "region": "North Africa",
+      "countries": ["Egypt", "Morocco", "Algeria", "Tunisia", "Libya", "Sudan"],
+      "script": "Arabic",
+      "direction": "rtl"
+    },
+    {
+      "code": "sw",
+      "name": "Swahili",
+      "nativeName": "Kiswahili",
+      "region": "East Africa",
+      "countries": ["Tanzania", "Kenya", "Uganda", "Rwanda", "Burundi", "DRC"],
+      "script": "Latin",
+      "direction": "ltr"
+    },
+    {
+      "code": "yo",
+      "name": "Yoruba",
+      "nativeName": "Yorùbá",
+      "region": "West Africa",
+      "countries": ["Nigeria", "Benin", "Togo"],
+      "script": "Latin",
+      "direction": "ltr"
+    },
+    {
+      "code": "ig",
+      "name": "Igbo",
+      "nativeName": "Igbo",
+      "region": "West Africa",
+      "countries": ["Nigeria"],
+      "script": "Latin",
+      "direction": "ltr"
+    },
+    {
+      "code": "ha",
+      "name": "Hausa",
+      "nativeName": "Hausa",
+      "region": "West Africa",
+      "countries": ["Nigeria", "Niger", "Ghana", "Cameroon"],
+      "script": "Latin",
+      "direction": "ltr"
+    },
+    {
+      "code": "zu",
+      "name": "Zulu",
+      "nativeName": "isiZulu",
+      "region": "Southern Africa",
+      "countries": ["South Africa"],
+      "script": "Latin",
+      "direction": "ltr"
+    },
+    {
+      "code": "xh",
+      "name": "Xhosa",
+      "nativeName": "isiXhosa",
+      "region": "Southern Africa",
+      "countries": ["South Africa"],
+      "script": "Latin",
+      "direction": "ltr"
+    }
+  ],
+  "codeSwitching": {
+    "en-yo": {
+      "description": "English-Yoruba code switching",
+      "commonPatterns": [
+        "Hello, how are you? (Bawo ni?)",
+        "Thank you very much (O se gan)",
+        "Good morning (E kaaro)"
+      ]
+    },
+    "en-ig": {
+      "description": "English-Igbo code switching",
+      "commonPatterns": [
+        "Hello, how are you? (Kedu ka ị mere?)",
+        "Thank you (Daalụ)",
+        "Good morning (Ụtụtụ ọma)"
+      ]
+    },
+    "en-ha": {
+      "description": "English-Hausa code switching",
+      "commonPatterns": [
+        "Hello, how are you? (Yaya kake?)",
+        "Thank you (Na gode)",
+        "Good morning (Barka da safiya)"
+      ]
+    }
+  },
+  "localization": {
+    "dateFormats": {
+      "en": "MM/DD/YYYY",
+      "fr": "DD/MM/YYYY",
+      "ar": "DD/MM/YYYY",
+      "sw": "DD/MM/YYYY",
+      "yo": "DD/MM/YYYY",
+      "ig": "DD/MM/YYYY",
+      "ha": "DD/MM/YYYY",
+      "zu": "DD/MM/YYYY",
+      "xh": "DD/MM/YYYY"
+    },
+    "numberFormats": {
+      "en": "1,234.56",
+      "fr": "1 234,56",
+      "ar": "١٬٢٣٤٫٥٦",
+      "sw": "1,234.56",
+      "yo": "1,234.56",
+      "ig": "1,234.56",
+      "ha": "1,234.56",
+      "zu": "1,234.56",
+      "xh": "1,234.56"
+    }
+  }
+} 
