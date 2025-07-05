@@ -293,28 +293,12 @@ export class AIEngine {
    * Handle code-switching between languages
    */
   async handleCodeSwitching(
-    input: string,
     primaryLanguage: string,
-    secondaryLanguage: string,
-    context?: Partial<ContextualData>
+    secondaryLanguage: string
   ): Promise<CodeSwitchingResponse> {
-    if (context) {
-      this.contextualEngine.updateContext(context);
-    }
-
-    const contextualAnalysis = this.contextualEngine.analyzeContext();
-    
     return await this.languageModelService.handleCodeSwitching(
-      input,
       primaryLanguage,
-      secondaryLanguage,
-      {
-        location: context?.location?.country || 'Unknown',
-        timeOfDay: context?.environment?.timeOfDay || 'afternoon',
-        offlineMode: contextualAnalysis.adaptations['offlineMode'],
-        lowBandwidth: contextualAnalysis.adaptations['lowBandwidth'],
-        mobileDevice: context?.device?.type === 'mobile'
-      }
+      secondaryLanguage
     );
   }
 

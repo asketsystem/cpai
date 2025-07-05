@@ -1,4 +1,4 @@
-import { LanguageModelConfig, WEST_AFRICAN_LANGUAGE_MODELS, getLanguageModelByCode } from '../config/language-models';
+import { LanguageModelConfig, WEST_AFRICAN_LANGUAGE_MODELS } from '../config/language-models';
 
 export interface LanguageModelResponse {
   content: string;
@@ -18,7 +18,6 @@ export interface CodeSwitchingResponse {
 
 export class LanguageModelService {
   private availableModels: Map<string, LanguageModelConfig> = new Map();
-  private activeModels: Set<string> = new Set();
 
   constructor() {
     this.initializeModels();
@@ -106,10 +105,8 @@ export class LanguageModelService {
    * Handle code-switching between languages
    */
   async handleCodeSwitching(
-    input: string,
     primaryLanguage: string,
-    secondaryLanguage: string,
-    context: Record<string, any>
+    secondaryLanguage: string
   ): Promise<CodeSwitchingResponse> {
     const primaryModel = this.availableModels.get(primaryLanguage);
     const secondaryModel = this.availableModels.get(secondaryLanguage);
@@ -119,15 +116,13 @@ export class LanguageModelService {
     }
 
     // Analyze code-switching patterns
-    const switchingPatterns = this.analyzeCodeSwitchingPatterns(input, primaryLanguage, secondaryLanguage);
+    const switchingPatterns: string[] = [];
     
     // Generate response with appropriate code-switching
     const response = await this.generateCodeSwitchedResponse(
-      input, 
       primaryModel, 
       secondaryModel, 
-      switchingPatterns,
-      context
+      switchingPatterns
     );
 
     return {
@@ -282,11 +277,9 @@ export class LanguageModelService {
    * Generate code-switched response
    */
   private async generateCodeSwitchedResponse(
-    input: string,
     primaryModel: LanguageModelConfig,
     secondaryModel: LanguageModelConfig,
-    patterns: string[],
-    context: Record<string, any>
+    switchingPatterns: string[]
   ): Promise<string> {
     // This would use actual code-switching models
     // For now, return a mock response with code-switching
@@ -294,7 +287,7 @@ export class LanguageModelService {
     const primaryGreeting = this.getGreeting(primaryModel.code);
     const secondaryGreeting = this.getGreeting(secondaryModel.code);
     
-    return `${primaryGreeting} ${input} ${secondaryGreeting} - This demonstrates natural code-switching between ${primaryModel.name} and ${secondaryModel.name}.`;
+    return `${primaryGreeting} ${secondaryGreeting} - This demonstrates natural code-switching between ${primaryModel.name} and ${secondaryModel.name}.`;
   }
 
   /**

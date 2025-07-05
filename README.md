@@ -429,4 +429,42 @@ curl -X POST http://localhost:3000/api/learning/compress-content \
 curl -X POST http://localhost:3000/api/learning/adapt-content \
   -H "Content-Type: application/json" \
   -d '{"userId":"user123","content":"Test","userBehavior":{"attentionSpan":20,"completionRate":60,"interactionFrequency":5,"preferredFormat":"text","learningPace":"medium"},"context":{"deviceType":"mobile","sessionDuration":30,"timeOfDay":"morning"}}'
-``` 
+```
+
+## React Client Application
+
+A modern React client application is available in the `client/` directory for testing and demonstrating the Advanced Adaptation Models.
+
+### Features
+- **Interactive UI** for testing all Phase 4 endpoints
+- **Type-safe API integration** with the backend
+- **Responsive design** for mobile and desktop
+- **Real-time feedback** with loading states and error handling
+
+### Quick Start
+
+1. **Start the backend server** (from project root):
+   ```bash
+   npm run dev
+   ```
+
+2. **Start the React client** (in a new terminal):
+   ```bash
+   cd client
+   npm install
+   npm run dev
+   ```
+
+3. **Open your browser** and visit `http://localhost:5173`
+
+### Client Features
+
+The React client provides three main interfaces:
+
+1. **Offline Content Generation** - Test content optimization for offline learning
+2. **Low Bandwidth Compression** - Test content compression for slow connections  
+3. **Behavioral Adaptation** - Test personalized content adaptation
+
+For detailed client documentation, see [client/README.md](client/README.md).
+
+## Advanced Adaptation API Endpoints 
