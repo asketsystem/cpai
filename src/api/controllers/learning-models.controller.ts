@@ -450,4 +450,46 @@ export class LearningModelsController {
       });
     }
   }
+
+  /**
+   * Accessibility: Generate screen reader content
+   */
+  async generateScreenReaderContent(req: Request, res: Response): Promise<void> {
+    try {
+      const request = req.body;
+      const response = await this.aiEngine.getLearningModelsService().generateScreenReaderContent(request);
+      res.status(200).json({ success: true, data: response });
+    } catch (error) {
+      console.error('Error generating screen reader content:', error);
+      res.status(500).json({ success: false, error: 'Failed to generate screen reader content' });
+    }
+  }
+
+  /**
+   * Accessibility: Generate captions
+   */
+  async generateCaptions(req: Request, res: Response): Promise<void> {
+    try {
+      const request = req.body;
+      const response = await this.aiEngine.getLearningModelsService().generateCaptions(request);
+      res.status(200).json({ success: true, data: response });
+    } catch (error) {
+      console.error('Error generating captions:', error);
+      res.status(500).json({ success: false, error: 'Failed to generate captions' });
+    }
+  }
+
+  /**
+   * Accessibility: Optimize content for mobile
+   */
+  async optimizeMobileContent(req: Request, res: Response): Promise<void> {
+    try {
+      const request = req.body;
+      const response = await this.aiEngine.getLearningModelsService().optimizeMobileContent(request);
+      res.status(200).json({ success: true, data: response });
+    } catch (error) {
+      console.error('Error optimizing mobile content:', error);
+      res.status(500).json({ success: false, error: 'Failed to optimize mobile content' });
+    }
+  }
 } 

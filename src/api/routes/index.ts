@@ -2,6 +2,7 @@ import { Router } from 'express';
 import userRoutes from './users';
 import learningRoutes from './learning';
 import sessionRoutes from './sessions';
+import learningModelsRoutes from './learning-models';
 
 const router = Router();
 
@@ -23,6 +24,7 @@ router.get('/health', (_req, res) => {
 router.use('/users', userRoutes);
 router.use('/learning', learningRoutes);
 router.use('/sessions', sessionRoutes);
+router.use('/learning-models', learningModelsRoutes);
 
 // API info route
 router.get('/', (_req, res) => {
@@ -33,6 +35,7 @@ router.get('/', (_req, res) => {
       users: `${API_PREFIX}/users`,
       learning: `${API_PREFIX}/learning`,
       sessions: `${API_PREFIX}/sessions`,
+      learningModels: `${API_PREFIX}/learning-models`,
       health: `${API_PREFIX}/health`,
       docs: '/api-docs',
     },

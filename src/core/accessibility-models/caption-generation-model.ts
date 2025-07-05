@@ -12,7 +12,7 @@ export interface CaptionSegment {
   startTime: number;
   endTime: number;
   text: string;
-  speaker?: string;
+  speaker?: string | undefined;
 }
 
 export interface CaptionGenerationResponse {

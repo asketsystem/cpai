@@ -421,4 +421,8 @@ export class AIEngine {
   private generateSessionId(): string {
     return `session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
   }
+
+  getLearningModelsService(): LearningModelsService {
+    return this.learningModelsService;
+  }
 } 

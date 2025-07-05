@@ -1,6 +1,7 @@
 import { VisualLearningModel, VisualContentRequest, VisualContentResponse } from './visual-learning-model';
 import { AssessmentGenerationModel, AssessmentRequest, AssessmentResponse } from './assessment-generation-model';
 import { TutoringModel, TutoringRequest, TutoringResponse } from './tutoring-model';
+import { AccessibilityModelsService, ScreenReaderRequest, ScreenReaderResponse, CaptionGenerationRequest, CaptionGenerationResponse, MobileOptimizedRequest, MobileOptimizedResponse } from '../accessibility-models';
 
 export interface LearningModelsConfig {
   enableVisualLearning: boolean;
@@ -65,12 +66,14 @@ export class LearningModelsService {
   private assessmentGenerationModel: AssessmentGenerationModel;
   private tutoringModel: TutoringModel;
   private config: LearningModelsConfig;
+  private accessibilityModelsService: AccessibilityModelsService;
 
   constructor(config: LearningModelsConfig) {
     this.config = config;
     this.visualLearningModel = new VisualLearningModel();
     this.assessmentGenerationModel = new AssessmentGenerationModel();
     this.tutoringModel = new TutoringModel();
+    this.accessibilityModelsService = new AccessibilityModelsService();
   }
 
   /**
@@ -364,9 +367,31 @@ export class LearningModelsService {
   getConfig(): LearningModelsConfig {
     return { ...this.config };
   }
+
+  /**
+   * Accessibility: Generate screen reader content
+   */
+  async generateScreenReaderContent(request: ScreenReaderRequest): Promise<ScreenReaderResponse> {
+    return this.accessibilityModelsService.generateScreenReaderContent(request);
+  }
+
+  /**
+   * Accessibility: Generate captions
+   */
+  async generateCaptions(request: CaptionGenerationRequest): Promise<CaptionGenerationResponse> {
+    return this.accessibilityModelsService.generateCaptions(request);
+  }
+
+  /**
+   * Accessibility: Optimize content for mobile
+   */
+  async optimizeMobileContent(request: MobileOptimizedRequest): Promise<MobileOptimizedResponse> {
+    return this.accessibilityModelsService.optimizeContent(request);
+  }
 }
 
 // Export all types and classes
 export * from './visual-learning-model';
 export * from './assessment-generation-model';
-export * from './tutoring-model'; 
+export * from './tutoring-model';
+export * from '../accessibility-models'; 
