@@ -138,7 +138,7 @@ export class VisualLearningModel {
     const startTime = Date.now();
 
     // Analyze topic and determine appropriate visual content types
-    const contentTypes = this.analyzeTopicForVisualContent(request.topic, request.difficulty);
+    const contentTypes = this.analyzeTopicForVisualContent(request.topic);
     
     // Generate content based on types
     const diagrams = await this.generateDiagrams(request, contentTypes.diagrams);
@@ -170,7 +170,7 @@ export class VisualLearningModel {
   /**
    * Analyze topic to determine appropriate visual content types
    */
-  private analyzeTopicForVisualContent(topic: string, difficulty: string): {
+  private analyzeTopicForVisualContent(topic: string): {
     diagrams: string[];
     infographics: string[];
     guides: string[];
@@ -489,8 +489,8 @@ export class VisualLearningModel {
   private async generateInfographics(request: VisualContentRequest, infographicTypes: string[]): Promise<Infographic[]> {
     const infographics: Infographic[] = [];
 
-    for (const type of infographicTypes) {
-      const infographic = await this.createInfographic(request.topic, type, request);
+    for (const _ of infographicTypes) {
+      const infographic = await this.createInfographic(request.topic, request);
       if (infographic) {
         infographics.push(infographic);
       }
@@ -502,7 +502,7 @@ export class VisualLearningModel {
   /**
    * Create infographic
    */
-  private async createInfographic(topic: string, type: string, request: VisualContentRequest): Promise<Infographic> {
+  private async createInfographic(topic: string, request: VisualContentRequest): Promise<Infographic> {
     const culturalContext = this.getCulturalContext(request.context.culturalContext);
     
     const sections: InfographicSection[] = [
@@ -543,8 +543,8 @@ export class VisualLearningModel {
   private async generateStepByStepGuides(request: VisualContentRequest, guideTypes: string[]): Promise<StepByStepGuide[]> {
     const guides: StepByStepGuide[] = [];
 
-    for (const type of guideTypes) {
-      const guide = await this.createStepByStepGuide(request.topic, type, request);
+    for (const _ of guideTypes) {
+      const guide = await this.createStepByStepGuide(request.topic, request);
       if (guide) {
         guides.push(guide);
       }
@@ -556,7 +556,7 @@ export class VisualLearningModel {
   /**
    * Create step-by-step guide
    */
-  private async createStepByStepGuide(topic: string, type: string, request: VisualContentRequest): Promise<StepByStepGuide> {
+  private async createStepByStepGuide(topic: string, request: VisualContentRequest): Promise<StepByStepGuide> {
     const culturalContext = this.getCulturalContext(request.context.culturalContext);
     
     const steps: GuideStep[] = [

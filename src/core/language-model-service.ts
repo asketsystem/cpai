@@ -71,12 +71,11 @@ export class LanguageModelService {
   }
 
   /**
-   * Generate content in a specific West African language
+   * Generate content using the specified language model
    */
   async generateContent(
     prompt: string,
-    languageCode: string,
-    context: Record<string, any>
+    languageCode: string
   ): Promise<LanguageModelResponse> {
     const model = this.availableModels.get(languageCode);
     
@@ -90,14 +89,14 @@ export class LanguageModelService {
 
     // This would integrate with actual fine-tuned models
     // For now, return a structured response
-    const response = await this.generateMockResponse(prompt, model, context);
+    const response = await this.generateMockResponse(prompt, model);
 
     return {
       content: response.content,
       language: languageCode,
       confidence: response.confidence,
-      adaptations: this.getLanguageAdaptations(model, context),
-      culturalContext: this.getCulturalContext(model, context)
+      adaptations: this.getLanguageAdaptations(model),
+      culturalContext: this.getCulturalContext(model)
     };
   }
 
@@ -115,21 +114,17 @@ export class LanguageModelService {
       throw new Error('One or both language models not found');
     }
 
-    // Analyze code-switching patterns
-    const switchingPatterns: string[] = [];
-    
     // Generate response with appropriate code-switching
     const response = await this.generateCodeSwitchedResponse(
       primaryModel, 
-      secondaryModel, 
-      switchingPatterns
+      secondaryModel
     );
 
     return {
       content: response,
       primaryLanguage,
       secondaryLanguage,
-      switchingPatterns,
+      switchingPatterns: [], // Mock patterns for now
       confidence: 0.85 // Mock confidence score
     };
   }
@@ -188,25 +183,12 @@ export class LanguageModelService {
   /**
    * Get language-specific adaptations
    */
-  private getLanguageAdaptations(model: LanguageModelConfig, context: Record<string, any>): Record<string, any> {
+  private getLanguageAdaptations(model: LanguageModelConfig): Record<string, any> {
     const adaptations: Record<string, any> = {
       script: model.name === 'Tamazight' ? 'Tifinagh' : 'Latin',
       direction: 'ltr',
       culturalSensitivity: true
     };
-
-    // Add context-specific adaptations
-    if (context['offlineMode']) {
-      adaptations['offlineOptimized'] = true;
-    }
-
-    if (context['lowBandwidth']) {
-      adaptations['compressedContent'] = true;
-    }
-
-    if (context['mobileDevice']) {
-      adaptations['mobileOptimized'] = true;
-    }
 
     return adaptations;
   }
@@ -214,41 +196,9 @@ export class LanguageModelService {
   /**
    * Get cultural context for a language
    */
-  private getCulturalContext(model: LanguageModelConfig, context: Record<string, any>): string[] {
+  private getCulturalContext(model: LanguageModelConfig): string[] {
     const culturalContext = [...model.specializations];
-
-    // Add location-specific cultural elements
-    if (context['location']) {
-      culturalContext.push(`local_${context['location']}`);
-    }
-
-    // Add time-based cultural elements
-    if (context['timeOfDay']) {
-      culturalContext.push(`time_${context['timeOfDay']}`);
-    }
-
     return culturalContext;
-  }
-
-  /**
-   * Analyze code-switching patterns in input
-   */
-  private analyzeCodeSwitchingPatterns(
-    input: string, 
-    primaryLanguage: string, 
-    secondaryLanguage: string
-  ): string[] {
-    // This would use actual NLP to detect code-switching patterns
-    // For now, return common patterns
-    const patterns: string[] = [];
-    
-    if (primaryLanguage === 'en' && secondaryLanguage === 'yo') {
-      patterns.push('greeting_switch', 'gratitude_switch', 'emphasis_switch');
-    } else if (primaryLanguage === 'fr' && secondaryLanguage === 'wo') {
-      patterns.push('greeting_switch', 'gratitude_switch', 'cultural_reference');
-    }
-
-    return patterns;
   }
 
   /**
@@ -256,8 +206,7 @@ export class LanguageModelService {
    */
   private async generateMockResponse(
     prompt: string, 
-    model: LanguageModelConfig, 
-    context: Record<string, any>
+    model: LanguageModelConfig
   ): Promise<{ content: string; confidence: number }> {
     // This would call the actual fine-tuned model
     // For now, return a contextualized mock response
@@ -278,8 +227,7 @@ export class LanguageModelService {
    */
   private async generateCodeSwitchedResponse(
     primaryModel: LanguageModelConfig,
-    secondaryModel: LanguageModelConfig,
-    switchingPatterns: string[]
+    secondaryModel: LanguageModelConfig
   ): Promise<string> {
     // This would use actual code-switching models
     // For now, return a mock response with code-switching

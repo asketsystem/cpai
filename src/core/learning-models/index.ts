@@ -192,7 +192,7 @@ export class LearningModelsService {
     }
 
     // Generate recommendations
-    const recommendations = this.generateRecommendations(request, content);
+    const recommendations = this.generateRecommendations(request);
 
     const generationTime = Date.now() - startTime;
 
@@ -205,7 +205,7 @@ export class LearningModelsService {
       metadata: {
         generationTime,
         modelsUsed,
-        confidence: this.calculateOverallConfidence(request, content),
+        confidence: this.calculateOverallConfidence(content),
         culturalAdaptation: request.context.culturalContext !== 'General'
       }
     };
@@ -261,7 +261,7 @@ export class LearningModelsService {
   /**
    * Generate recommendations based on content and user context
    */
-  private generateRecommendations(request: IntegratedLearningRequest, content: any): {
+  private generateRecommendations(request: IntegratedLearningRequest): {
     nextSteps: string[];
     suggestedTopics: string[];
     practiceExercises: string[];
@@ -314,7 +314,7 @@ export class LearningModelsService {
   /**
    * Calculate overall confidence based on all generated content
    */
-  private calculateOverallConfidence(request: IntegratedLearningRequest, content: any): number {
+  private calculateOverallConfidence(content: any): number {
     let totalConfidence = 0;
     let modelCount = 0;
 

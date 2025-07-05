@@ -126,14 +126,7 @@ export class AIEngine {
         // Generate response using the fine-tuned language model
         const languageResponse = await this.languageModelService.generateContent(
           userInput,
-          optimalModel.code,
-          {
-            location: context.location.country,
-            timeOfDay: context.environment.timeOfDay,
-            offlineMode: contextualAnalysis.adaptations.offlineMode,
-            lowBandwidth: contextualAnalysis.adaptations.lowBandwidth,
-            mobileDevice: context.device.type === 'mobile'
-          }
+          optimalModel.code
         );
 
         return languageResponse.content;
@@ -267,26 +260,12 @@ export class AIEngine {
    */
   async generateLanguageContent(
     prompt: string,
-    languageCode: string,
-    context?: Partial<ContextualData>
+    languageCode: string
   ): Promise<LanguageModelResponse> {
-    if (context) {
-      this.contextualEngine.updateContext(context);
-    }
-
-    const contextualAnalysis = this.contextualEngine.analyzeContext();
-    
-          return await this.languageModelService.generateContent(
-        prompt,
-        languageCode,
-        {
-          location: context?.location?.country || 'Unknown',
-          timeOfDay: context?.environment?.timeOfDay || 'afternoon',
-          offlineMode: contextualAnalysis.adaptations['offlineMode'],
-          lowBandwidth: contextualAnalysis.adaptations['lowBandwidth'],
-          mobileDevice: context?.device?.type === 'mobile'
-        }
-      );
+    return await this.languageModelService.generateContent(
+      prompt,
+      languageCode
+    );
   }
 
   /**

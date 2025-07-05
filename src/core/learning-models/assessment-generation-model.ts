@@ -135,7 +135,7 @@ export class AssessmentGenerationModel {
         generationTime,
         modelVersion: this.modelVersion,
         confidence: this.calculateConfidence(request, questions),
-        topicCoverage: this.calculateTopicCoverage(request.topic, questions)
+        topicCoverage: this.calculateTopicCoverage(questions)
       }
     };
   }
@@ -274,7 +274,7 @@ export class AssessmentGenerationModel {
     request: AssessmentRequest,
     culturalContext: any
   ): AssessmentQuestion {
-    const questionText = this.getQuestionTemplate(topic, difficulty, 'multiple_choice', culturalContext);
+    const questionText = this.getQuestionTemplate(topic, difficulty, 'multiple_choice');
     
     const options: QuestionOption[] = [
       {
@@ -326,7 +326,7 @@ export class AssessmentGenerationModel {
     request: AssessmentRequest,
     culturalContext: any
   ): AssessmentQuestion {
-    const questionText = this.getQuestionTemplate(topic, difficulty, 'true_false', culturalContext);
+    const questionText = this.getQuestionTemplate(topic, difficulty, 'true_false');
     
     const options: QuestionOption[] = [
       {
@@ -366,7 +366,7 @@ export class AssessmentGenerationModel {
     request: AssessmentRequest,
     culturalContext: any
   ): AssessmentQuestion {
-    const questionText = this.getQuestionTemplate(topic, difficulty, 'fill_blank', culturalContext);
+    const questionText = this.getQuestionTemplate(topic, difficulty, 'fill_blank');
 
     return {
       id: `fb_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
@@ -390,7 +390,7 @@ export class AssessmentGenerationModel {
     request: AssessmentRequest,
     culturalContext: any
   ): AssessmentQuestion {
-    const questionText = this.getQuestionTemplate(topic, difficulty, 'essay', culturalContext);
+    const questionText = this.getQuestionTemplate(topic, difficulty, 'essay');
 
     return {
       id: `essay_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
@@ -432,7 +432,7 @@ export class AssessmentGenerationModel {
   /**
    * Get question template based on topic and difficulty
    */
-  private getQuestionTemplate(topic: string, difficulty: string, type: string, culturalContext: any): string {
+  private getQuestionTemplate(topic: string, difficulty: string, type: string): string {
     const templates = this.questionTemplates.get(`${topic}_${difficulty}_${type}`);
     
     if (templates) {
@@ -510,7 +510,7 @@ export class AssessmentGenerationModel {
   /**
    * Calculate topic coverage
    */
-  private calculateTopicCoverage(topic: string, questions: AssessmentQuestion[]): number {
+  private calculateTopicCoverage(questions: AssessmentQuestion[]): number {
     // This would analyze how well the questions cover the topic
     // For now, return a mock coverage based on question count
     const baseCoverage = Math.min(questions.length * 10, 100);

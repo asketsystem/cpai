@@ -111,14 +111,14 @@ export class TutoringModel {
     const mainAnswer = await this.generateMainAnswer(request, analysis, approach);
     
     // Generate explanation and examples
-    const explanation = this.generateExplanation(request, analysis, approach);
-    const examples = await this.generateExamples(request, analysis);
+    const explanation = this.generateExplanation(request, analysis);
+    const examples = await this.generateExamples(request);
     
     // Generate follow-up questions
-    const followUpQuestions = this.generateFollowUpQuestions(request, analysis, approach);
+    const followUpQuestions = this.generateFollowUpQuestions(request, approach);
     
     // Generate next steps
-    const nextSteps = this.generateNextSteps(request, analysis);
+    const nextSteps = this.generateNextSteps(request);
 
     const responseTime = Date.now() - startTime;
 
@@ -219,26 +219,24 @@ export class TutoringModel {
    * Generate main answer based on approach
    */
   private async generateMainAnswer(request: TutoringRequest, analysis: any, approach: string): Promise<string> {
-    const culturalContext = this.getCulturalContext(request.context.culturalContext);
-    
     switch (approach) {
       case 'socratic':
-        return this.generateSocraticResponse(request, analysis, culturalContext);
+        return this.generateSocraticResponse(request, analysis);
       case 'direct':
-        return this.generateDirectResponse(request, analysis, culturalContext);
+        return this.generateDirectResponse(request, analysis);
       case 'guided':
-        return this.generateGuidedResponse(request, analysis, culturalContext);
+        return this.generateGuidedResponse(request, analysis);
       case 'encouraging':
-        return this.generateEncouragingResponse(request, analysis, culturalContext);
+        return this.generateEncouragingResponse(request, analysis);
       default:
-        return this.generateGuidedResponse(request, analysis, culturalContext);
+        return this.generateGuidedResponse(request, analysis);
     }
   }
 
   /**
-   * Generate Socratic method response
+   * Generate Socratic response
    */
-  private generateSocraticResponse(request: TutoringRequest, analysis: any, culturalContext: any): string {
+  private generateSocraticResponse(request: TutoringRequest, analysis: any): string {
     const socraticQuestions = this.socraticQuestions.get(analysis.questionType) || [];
     const question = socraticQuestions[Math.floor(Math.random() * socraticQuestions.length)];
     
@@ -248,33 +246,31 @@ export class TutoringModel {
   /**
    * Generate direct response
    */
-  private generateDirectResponse(request: TutoringRequest, analysis: any, culturalContext: any): string {
-    const template = this.getResponseTemplate(analysis.questionType, 'direct', culturalContext);
+  private generateDirectResponse(request: TutoringRequest, analysis: any): string {
+    const template = this.getResponseTemplate(analysis.questionType, 'direct');
     return template.replace('{topic}', request.topic).replace('{question}', request.question);
   }
 
   /**
    * Generate guided response
    */
-  private generateGuidedResponse(request: TutoringRequest, analysis: any, culturalContext: any): string {
-    const template = this.getResponseTemplate(analysis.questionType, 'guided', culturalContext);
+  private generateGuidedResponse(request: TutoringRequest, analysis: any): string {
+    const template = this.getResponseTemplate(analysis.questionType, 'guided');
     return template.replace('{topic}', request.topic).replace('{question}', request.question);
   }
 
   /**
    * Generate encouraging response
    */
-  private generateEncouragingResponse(request: TutoringRequest, analysis: any, culturalContext: any): string {
-    const template = this.getResponseTemplate(analysis.questionType, 'encouraging', culturalContext);
+  private generateEncouragingResponse(request: TutoringRequest, analysis: any): string {
+    const template = this.getResponseTemplate(analysis.questionType, 'encouraging');
     return template.replace('{topic}', request.topic).replace('{question}', request.question);
   }
 
   /**
    * Generate explanation
    */
-  private generateExplanation(request: TutoringRequest, analysis: any, approach: string): string {
-    const culturalContext = this.getCulturalContext(request.context.culturalContext);
-    
+  private generateExplanation(request: TutoringRequest, analysis: any): string {
     let explanation = this.getLocalizedText('explanation_start', request.context.language);
     
     if (analysis.requiresVisuals) {
@@ -291,7 +287,7 @@ export class TutoringModel {
   /**
    * Generate examples
    */
-  private async generateExamples(request: TutoringRequest, analysis: any): Promise<TutoringExample[]> {
+  private async generateExamples(request: TutoringRequest): Promise<TutoringExample[]> {
     const examples: TutoringExample[] = [];
     const culturalContext = this.getCulturalContext(request.context.culturalContext);
 
@@ -327,9 +323,8 @@ export class TutoringModel {
   /**
    * Generate follow-up questions
    */
-  private generateFollowUpQuestions(request: TutoringRequest, analysis: any, approach: string): string[] {
+  private generateFollowUpQuestions(request: TutoringRequest, approach: string): string[] {
     const questions: string[] = [];
-    const culturalContext = this.getCulturalContext(request.context.culturalContext);
 
     if (approach === 'socratic') {
       questions.push(this.getLocalizedText('follow_up_1', request.context.language));
@@ -344,9 +339,8 @@ export class TutoringModel {
   /**
    * Generate next steps
    */
-  private generateNextSteps(request: TutoringRequest, analysis: any): string[] {
+  private generateNextSteps(request: TutoringRequest): string[] {
     const steps: string[] = [];
-    const culturalContext = this.getCulturalContext(request.context.culturalContext);
 
     steps.push(this.getLocalizedText('next_step_1', request.context.language));
     
@@ -424,21 +418,17 @@ export class TutoringModel {
   /**
    * Get response template
    */
-  private getResponseTemplate(questionType: string, approach: string, culturalContext: any): string {
+  private getResponseTemplate(questionType: string, approach: string): string {
     const templates = this.responseTemplates.get(`${questionType}_${approach}`);
-    
     if (templates) {
       return templates[Math.floor(Math.random() * templates.length)];
     }
-
-    // Default templates
     const defaultTemplates = {
       direct: 'Here is the answer to your question about {topic}: {question}',
       guided: 'Let me guide you through understanding {topic}. {question}',
       encouraging: 'Great question about {topic}! Let me help you understand {question}',
       socratic: 'What do you think about {topic}? {question}'
     };
-
     return defaultTemplates[approach as keyof typeof defaultTemplates] || defaultTemplates.guided;
   }
 

@@ -32,26 +32,26 @@ export class ScreenReaderModel {
     let description = '';
     switch (request.contentType) {
       case 'image':
-        ariaLabel = 'Image: ' + this.summarizeContent(request.content, request.language);
-        altText = this.summarizeContent(request.content, request.language);
-        description = 'This image shows: ' + this.summarizeContent(request.content, request.language);
+        ariaLabel = 'Image: ' + this.summarizeContent(request.content);
+        altText = this.summarizeContent(request.content);
+        description = 'This image shows: ' + this.summarizeContent(request.content);
         break;
       case 'diagram':
-        ariaLabel = 'Diagram: ' + this.summarizeContent(request.content, request.language);
-        altText = this.summarizeContent(request.content, request.language);
-        description = 'This diagram illustrates: ' + this.summarizeContent(request.content, request.language);
+        ariaLabel = 'Diagram: ' + this.summarizeContent(request.content);
+        altText = this.summarizeContent(request.content);
+        description = 'This diagram illustrates: ' + this.summarizeContent(request.content);
         break;
       case 'interactive':
-        ariaLabel = 'Interactive element: ' + this.summarizeContent(request.content, request.language);
-        description = 'This interactive element allows: ' + this.summarizeContent(request.content, request.language);
+        ariaLabel = 'Interactive element: ' + this.summarizeContent(request.content);
+        description = 'This interactive element allows: ' + this.summarizeContent(request.content);
         break;
       case 'video':
-        ariaLabel = 'Video: ' + this.summarizeContent(request.content, request.language);
-        description = 'This video covers: ' + this.summarizeContent(request.content, request.language);
+        ariaLabel = 'Video: ' + this.summarizeContent(request.content);
+        description = 'This video covers: ' + this.summarizeContent(request.content);
         break;
       default:
-        ariaLabel = 'Text: ' + this.summarizeContent(request.content, request.language);
-        description = this.summarizeContent(request.content, request.language);
+        ariaLabel = 'Text: ' + this.summarizeContent(request.content);
+        description = this.summarizeContent(request.content);
     }
     return {
       ariaLabel,
@@ -67,8 +67,12 @@ export class ScreenReaderModel {
     };
   }
 
-  private summarizeContent(content: string, language: string): string {
-    // Placeholder for actual summarization/translation
-    return content.length > 80 ? content.slice(0, 77) + '...' : content;
+  /**
+   * Summarize content for screen readers
+   */
+  private summarizeContent(content: string): string {
+    // This would use actual summarization logic
+    // For now, return a simplified version
+    return content.length > 200 ? content.substring(0, 200) + '...' : content;
   }
 } 

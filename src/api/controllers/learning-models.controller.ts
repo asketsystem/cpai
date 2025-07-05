@@ -147,8 +147,7 @@ export class LearningModelsController {
         topic,
         difficulty,
         userLevel,
-        context,
-        preferences
+        context
       } = req.body;
 
       // Validate required fields
@@ -291,7 +290,7 @@ export class LearningModelsController {
   /**
    * Get learning models statistics
    */
-  async getModelStats(req: Request, res: Response): Promise<void> {
+  async getModelStats(_req: Request, res: Response): Promise<void> {
     try {
       const stats = this.aiEngine.getLearningModelsStats();
       
@@ -311,7 +310,7 @@ export class LearningModelsController {
   /**
    * Get learning models configuration
    */
-  async getConfig(req: Request, res: Response): Promise<void> {
+  async getConfig(_req: Request, res: Response): Promise<void> {
     try {
       const config = this.aiEngine.getLearningModelsConfig();
       
@@ -377,70 +376,33 @@ export class LearningModelsController {
   }
 
   /**
-   * Get Phase 1 implementation status
+   * Get Phase 1 models status
    */
-  async getPhase1Status(req: Request, res: Response): Promise<void> {
+  async getPhase1Status(_req: Request, res: Response): Promise<void> {
     try {
       const stats = this.aiEngine.getLearningModelsStats();
-      const config = this.aiEngine.getLearningModelsConfig();
       
-      const status = {
-        phase: 'Phase 1: Core Learning Models',
-        status: 'Implemented',
-        models: {
-          visualLearning: {
-            name: 'Visual Learning Model',
-            status: stats.visualLearning.enabled ? 'Active' : 'Disabled',
-            version: stats.visualLearning.version,
-            features: [
-              'Diagram generation (flowcharts, mindmaps, process diagrams)',
-              'Infographic creation',
-              'Step-by-step visual guides',
-              'Interactive elements',
-              'Cultural context adaptation',
-              'Accessibility compliance'
-            ]
-          },
-          assessmentGeneration: {
-            name: 'Assessment Generation Model',
-            status: stats.assessmentGeneration.enabled ? 'Active' : 'Disabled',
-            version: stats.assessmentGeneration.version,
-            features: [
-              'Personalized question generation',
-              'Multiple question types (MCQ, T/F, fill-in-blank, essay)',
-              'Difficulty-based question distribution',
-              'Cultural context integration',
-              'Immediate feedback system',
-              'Progress tracking'
-            ]
-          },
-          tutoring: {
-            name: 'Tutoring Model',
-            status: stats.tutoring.enabled ? 'Active' : 'Disabled',
-            version: stats.tutoring.version,
-            features: [
-              'Socratic method implementation',
-              'Multiple response styles (direct, guided, encouraging)',
-              'Cultural examples and analogies',
-              'Follow-up question generation',
-              'Personalized explanations',
-              'Learning path recommendations'
-            ]
-          }
+      const phase1Status = {
+        visualLearning: {
+          enabled: stats.visualLearning.enabled,
+          version: stats.visualLearning.version,
+          status: 'operational'
         },
-        integration: {
-          unifiedAPI: true,
-          contextualAdaptation: true,
-          culturalLocalization: true,
-          mobileOptimization: true,
-          offlineCapability: true
+        assessmentGeneration: {
+          enabled: stats.assessmentGeneration.enabled,
+          version: stats.assessmentGeneration.version,
+          status: 'operational'
         },
-        configuration: config
+        tutoring: {
+          enabled: stats.tutoring.enabled,
+          version: stats.tutoring.version,
+          status: 'operational'
+        }
       };
-      
+
       res.status(200).json({
         success: true,
-        data: status
+        data: phase1Status
       });
     } catch (error) {
       console.error('Error getting Phase 1 status:', error);
