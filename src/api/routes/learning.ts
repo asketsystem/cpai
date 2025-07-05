@@ -28,4 +28,9 @@ router.post('/progress', learningController.updateProgress);
 router.get('/offline/:contentId', learningController.getOfflineContent);
 router.post('/sync', learningController.syncOfflineData);
 
+// Advanced Adaptation Models - Phase 4
+router.post('/offline-content', learningController.generateOfflineContent.bind(learningController));
+router.post('/compress-content', learningController.compressContent.bind(learningController));
+router.post('/adapt-content', learningController.adaptContent.bind(learningController));
+
 export default router; 

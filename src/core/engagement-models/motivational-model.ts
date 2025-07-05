@@ -33,10 +33,10 @@ export class MotivationalModel {
       message = 'Great work! Keep up the momentum.';
       tone = 'encouraging';
     } else if (request.mood === 'negative') {
-      message = 'Don't give up! Every step counts, and you're making progress.';
+      message = "Don't give up! Every step counts, and you're making progress.";
       tone = 'supportive';
     } else {
-      message = 'Let's keep going! You can do this.';
+      message = "Let's keep going! You can do this.";
       tone = 'challenging';
     }
     return {

@@ -1,7 +1,7 @@
 import { ContextualEngine, ContextualData } from './contextual-engine';
 import { PersonalEngine, PersonalData } from './personal-engine';
 import { LanguageModelService, LanguageModelResponse, CodeSwitchingResponse } from './language-model-service';
-import { LearningModelsService, IntegratedLearningRequest, IntegratedLearningResponse, LearningModelsConfig } from './learning-models';
+import { LearningModelsService, IntegratedLearningRequest, IntegratedLearningResponse, LearningModelsConfig, OfflineFirstRequest, OfflineFirstResponse, LowBandwidthRequest, LowBandwidthResponse, BehavioralAdaptationRequest, BehavioralAdaptationResponse } from './learning-models';
 
 export interface AIResponse {
   content: string;
@@ -424,5 +424,70 @@ export class AIEngine {
 
   getLearningModelsService(): LearningModelsService {
     return this.learningModelsService;
+  }
+
+  /**
+   * Advanced Adaptation: Generate offline content
+   */
+  async generateOfflineContent(request: OfflineFirstRequest): Promise<OfflineFirstResponse> {
+    try {
+      console.log('Generating offline content', { request });
+      
+      const response = await this.learningModelsService.generateOfflineContent(request);
+      
+      console.log('Offline content generated successfully', { 
+        storageSize: response.storageSize,
+        syncRequired: response.syncRequired 
+      });
+      
+      return response;
+    } catch (error) {
+      console.error('Error generating offline content', { error, request });
+      throw error;
+    }
+  }
+
+  /**
+   * Advanced Adaptation: Compress content for low bandwidth
+   */
+  async compressContent(request: LowBandwidthRequest): Promise<LowBandwidthResponse> {
+    try {
+      console.log('Compressing content for low bandwidth', { request });
+      
+      const response = await this.learningModelsService.compressContent(request);
+      
+      console.log('Content compressed successfully', { 
+        originalSize: response.originalSize,
+        compressedSize: response.compressedSize,
+        compressionRatio: response.compressionRatio 
+      });
+      
+      return response;
+    } catch (error) {
+      console.error('Error compressing content', { error, request });
+      throw error;
+    }
+  }
+
+  /**
+   * Advanced Adaptation: Adapt content based on user behavior
+   */
+  async adaptContent(request: BehavioralAdaptationRequest): Promise<BehavioralAdaptationResponse> {
+    try {
+      console.log('Adapting content based on user behavior', { request });
+      
+      const response = await this.learningModelsService.adaptContent(request);
+      
+      console.log('Content adapted successfully', { 
+        userId: request.userId,
+        adaptations: response.adaptations,
+        confidence: response.metadata.confidence 
+      });
+      
+      return response;
+    } catch (error) {
+      console.error('Error adapting content', { error, request });
+      throw error;
+    }
   }
 } 

@@ -1,6 +1,17 @@
 import { Request, Response } from 'express';
+import { AIEngine } from '../../core/ai-engine';
+import { 
+  OfflineFirstRequest,
+  LowBandwidthRequest,
+  BehavioralAdaptationRequest
+} from '../../core/learning-models';
 
 export class LearningController {
+  private aiEngine: AIEngine;
+
+  constructor() {
+    this.aiEngine = new AIEngine();
+  }
   getContent = async (_req: Request, res: Response): Promise<void> => {
     try {
       res.status(200).json({
@@ -236,4 +247,100 @@ export class LearningController {
       });
     }
   };
+
+  /**
+   * @route POST /api/learning/offline-content
+   * @desc Generate offline content for offline-first learning
+   */
+  async generateOfflineContent(req: Request, res: Response): Promise<void> {
+    try {
+      const request: OfflineFirstRequest = req.body;
+      
+      // Validate request
+      if (!request.content || !request.contentType || !request.priority) {
+        res.status(400).json({ 
+          error: 'Missing required fields: content, contentType, priority' 
+        });
+        return;
+      }
+
+      const response = await this.aiEngine.generateOfflineContent(request);
+      
+      res.status(200).json({
+        success: true,
+        data: response,
+        message: 'Offline content generated successfully'
+      });
+    } catch (error) {
+      console.error('Error generating offline content:', error);
+      res.status(500).json({ 
+        error: 'Failed to generate offline content',
+        details: error instanceof Error ? error.message : 'Unknown error'
+      });
+    }
+  }
+
+  /**
+   * @route POST /api/learning/compress-content
+   * @desc Compress content for low-bandwidth environments
+   */
+  async compressContent(req: Request, res: Response): Promise<void> {
+    try {
+      const request: LowBandwidthRequest = req.body;
+      
+      // Validate request
+      if (!request.content || !request.contentType || !request.bandwidth) {
+        res.status(400).json({ 
+          error: 'Missing required fields: content, contentType, bandwidth' 
+        });
+        return;
+      }
+
+      const response = await this.aiEngine.compressContent(request);
+      
+      res.status(200).json({
+        success: true,
+        data: response,
+        message: 'Content compressed successfully'
+      });
+    } catch (error) {
+      console.error('Error compressing content:', error);
+      res.status(500).json({ 
+        error: 'Failed to compress content',
+        details: error instanceof Error ? error.message : 'Unknown error'
+      });
+    }
+  }
+
+  /**
+   * @route POST /api/learning/adapt-content
+   * @desc Adapt content based on user behavior patterns
+   */
+  async adaptContent(req: Request, res: Response): Promise<void> {
+    try {
+      const request: BehavioralAdaptationRequest = req.body;
+      
+      // Validate request
+      if (!request.userId || !request.content || !request.userBehavior) {
+        res.status(400).json({ 
+          error: 'Missing required fields: userId, content, userBehavior' 
+        });
+        return;
+      }
+
+      const response = await this.aiEngine.adaptContent(request);
+      
+      res.status(200).json({
+        success: true,
+        data: response,
+        message: 'Content adapted successfully'
+      });
+    } catch (error) {
+      console.error('Error adapting content:', error);
+      res.status(500).json({ 
+        error: 'Failed to adapt content',
+        details: error instanceof Error ? error.message : 'Unknown error'
+      });
+    }
+  }
 } 

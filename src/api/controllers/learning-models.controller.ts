@@ -492,4 +492,46 @@ export class LearningModelsController {
       res.status(500).json({ success: false, error: 'Failed to optimize mobile content' });
     }
   }
+
+  /**
+   * Engagement: Generate gamification content
+   */
+  async generateGamification(req: Request, res: Response): Promise<void> {
+    try {
+      const request = req.body;
+      const response = await this.aiEngine.getLearningModelsService().generateGamification(request);
+      res.status(200).json({ success: true, data: response });
+    } catch (error) {
+      console.error('Error generating gamification:', error);
+      res.status(500).json({ success: false, error: 'Failed to generate gamification content' });
+    }
+  }
+
+  /**
+   * Engagement: Generate motivational content
+   */
+  async generateMotivation(req: Request, res: Response): Promise<void> {
+    try {
+      const request = req.body;
+      const response = await this.aiEngine.getLearningModelsService().generateMotivation(request);
+      res.status(200).json({ success: true, data: response });
+    } catch (error) {
+      console.error('Error generating motivation:', error);
+      res.status(500).json({ success: false, error: 'Failed to generate motivational content' });
+    }
+  }
+
+  /**
+   * Engagement: Localize content with cultural context
+   */
+  async localizeContent(req: Request, res: Response): Promise<void> {
+    try {
+      const request = req.body;
+      const response = await this.aiEngine.getLearningModelsService().localizeContent(request);
+      res.status(200).json({ success: true, data: response });
+    } catch (error) {
+      console.error('Error localizing content:', error);
+      res.status(500).json({ success: false, error: 'Failed to localize content' });
+    }
+  }
 } 

@@ -304,4 +304,129 @@ This project is licensed under the MIT License - see the [LICENSE](./LICENSE) fi
 
 *"The future of AI is not just intelligent—it's contextually aware and personally meaningful."*
 
-**Join us in building AI that truly understands Africa.** 
+**Join us in building AI that truly understands Africa.**
+
+## Advanced Adaptation API Endpoints
+
+### 1. Generate Offline Content
+- **POST** `/api/learning/offline-content`
+- **Request Body:**
+  ```json
+  {
+    "content": "string",
+    "contentType": "text | image | video | interactive",
+    "priority": "high | medium | low",
+    "context": {
+      "deviceType": "mobile | desktop | tablet",
+      "storageAvailable": 100,
+      "lastSyncTime": "2024-06-01T12:00:00Z"
+    }
+  }
+  ```
+- **Response:**
+  ```json
+  {
+    "success": true,
+    "data": {
+      "offlineContent": "string",
+      "syncRequired": true,
+      "storageSize": 1.2,
+      "priority": "high",
+      "metadata": { "modelVersion": "1.0.0", "generationTime": 12, "confidence": 0.96 }
+    },
+    "message": "Offline content generated successfully"
+  }
+  ```
+
+### 2. Compress Content for Low Bandwidth
+- **POST** `/api/learning/compress-content`
+- **Request Body:**
+  ```json
+  {
+    "content": "string",
+    "contentType": "text | image | video | interactive",
+    "bandwidth": "slow | medium | fast",
+    "context": {
+      "deviceType": "mobile | desktop | tablet",
+      "connectionType": "wifi | mobile | satellite"
+    }
+  }
+  ```
+- **Response:**
+  ```json
+  {
+    "success": true,
+    "data": {
+      "compressedContent": "string",
+      "originalSize": 1.2,
+      "compressedSize": 0.4,
+      "compressionRatio": 0.3,
+      "quality": "low",
+      "metadata": { "modelVersion": "1.0.0", "generationTime": 10, "confidence": 0.94 }
+    },
+    "message": "Content compressed successfully"
+  }
+  ```
+
+### 3. Adapt Content Based on User Behavior
+- **POST** `/api/learning/adapt-content`
+- **Request Body:**
+  ```json
+  {
+    "userId": "string",
+    "content": "string",
+    "userBehavior": {
+      "attentionSpan": 20,
+      "completionRate": 60,
+      "interactionFrequency": 5,
+      "preferredFormat": "text | audio | video | interactive",
+      "learningPace": "slow | medium | fast"
+    },
+    "context": {
+      "deviceType": "mobile | desktop | tablet",
+      "sessionDuration": 30,
+      "timeOfDay": "morning | afternoon | evening | night"
+    }
+  }
+  ```
+- **Response:**
+  ```json
+  {
+    "success": true,
+    "data": {
+      "adaptedContent": "string",
+      "adaptations": {
+        "pacing": "accelerated | normal | slowed",
+        "format": "text | audio | video | interactive",
+        "complexity": "simplified | standard | enhanced",
+        "engagement": "high | medium | low"
+      },
+      "recommendations": ["string"],
+      "metadata": { "modelVersion": "1.0.0", "generationTime": 15, "confidence": 0.92 }
+    },
+    "message": "Content adapted successfully"
+  }
+  ```
+
+### Example Usage (cURL)
+
+**Offline Content:**
+```sh
+curl -X POST http://localhost:3000/api/learning/offline-content \
+  -H "Content-Type: application/json" \
+  -d '{"content":"Test","contentType":"text","priority":"high","context":{"deviceType":"mobile","storageAvailable":100}}'
+```
+
+**Compress Content:**
+```sh
+curl -X POST http://localhost:3000/api/learning/compress-content \
+  -H "Content-Type: application/json" \
+  -d '{"content":"Test","contentType":"text","bandwidth":"slow","context":{"deviceType":"mobile","connectionType":"wifi"}}'
+```
+
+**Adapt Content:**
+```sh
+curl -X POST http://localhost:3000/api/learning/adapt-content \
+  -H "Content-Type: application/json" \
+  -d '{"userId":"user123","content":"Test","userBehavior":{"attentionSpan":20,"completionRate":60,"interactionFrequency":5,"preferredFormat":"text","learningPace":"medium"},"context":{"deviceType":"mobile","sessionDuration":30,"timeOfDay":"morning"}}'
+``` 

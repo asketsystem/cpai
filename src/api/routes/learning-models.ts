@@ -17,6 +17,11 @@ router.post('/screen-reader', controller.generateScreenReaderContent.bind(contro
 router.post('/captions', controller.generateCaptions.bind(controller));
 router.post('/mobile-optimize', controller.optimizeMobileContent.bind(controller));
 
+// Phase 3 engagement endpoints
+router.post('/gamification', controller.generateGamification.bind(controller));
+router.post('/motivation', controller.generateMotivation.bind(controller));
+router.post('/localize', controller.localizeContent.bind(controller));
+
 // Model stats/config
 router.get('/stats', controller.getModelStats.bind(controller));
 router.get('/config', controller.getConfig.bind(controller));

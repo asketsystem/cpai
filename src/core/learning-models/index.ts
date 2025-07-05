@@ -2,6 +2,8 @@ import { VisualLearningModel, VisualContentRequest, VisualContentResponse } from
 import { AssessmentGenerationModel, AssessmentRequest, AssessmentResponse } from './assessment-generation-model';
 import { TutoringModel, TutoringRequest, TutoringResponse } from './tutoring-model';
 import { AccessibilityModelsService, ScreenReaderRequest, ScreenReaderResponse, CaptionGenerationRequest, CaptionGenerationResponse, MobileOptimizedRequest, MobileOptimizedResponse } from '../accessibility-models';
+import { EngagementModelsService, GamificationRequest, GamificationResponse, MotivationalRequest, MotivationalResponse, CulturalContextRequest, CulturalContextResponse } from '../engagement-models';
+import { AdvancedAdaptationModelsService, OfflineFirstRequest, OfflineFirstResponse, LowBandwidthRequest, LowBandwidthResponse, BehavioralAdaptationRequest, BehavioralAdaptationResponse } from '../advanced-adaptation-models';
 
 export interface LearningModelsConfig {
   enableVisualLearning: boolean;
@@ -67,6 +69,8 @@ export class LearningModelsService {
   private tutoringModel: TutoringModel;
   private config: LearningModelsConfig;
   private accessibilityModelsService: AccessibilityModelsService;
+  private engagementModelsService: EngagementModelsService;
+  private advancedAdaptationModelsService: AdvancedAdaptationModelsService;
 
   constructor(config: LearningModelsConfig) {
     this.config = config;
@@ -74,6 +78,8 @@ export class LearningModelsService {
     this.assessmentGenerationModel = new AssessmentGenerationModel();
     this.tutoringModel = new TutoringModel();
     this.accessibilityModelsService = new AccessibilityModelsService();
+    this.engagementModelsService = new EngagementModelsService();
+    this.advancedAdaptationModelsService = new AdvancedAdaptationModelsService();
   }
 
   /**
@@ -388,10 +394,54 @@ export class LearningModelsService {
   async optimizeMobileContent(request: MobileOptimizedRequest): Promise<MobileOptimizedResponse> {
     return this.accessibilityModelsService.optimizeContent(request);
   }
+
+  /**
+   * Engagement: Generate gamification content
+   */
+  async generateGamification(request: GamificationRequest): Promise<GamificationResponse> {
+    return this.engagementModelsService.generateGamification(request);
+  }
+
+  /**
+   * Engagement: Generate motivational content
+   */
+  async generateMotivation(request: MotivationalRequest): Promise<MotivationalResponse> {
+    return this.engagementModelsService.generateMotivation(request);
+  }
+
+  /**
+   * Engagement: Localize content with cultural context
+   */
+  async localizeContent(request: CulturalContextRequest): Promise<CulturalContextResponse> {
+    return this.engagementModelsService.localizeContent(request);
+  }
+
+  /**
+   * Advanced Adaptation: Generate offline content
+   */
+  async generateOfflineContent(request: OfflineFirstRequest): Promise<OfflineFirstResponse> {
+    return this.advancedAdaptationModelsService.generateOfflineContent(request);
+  }
+
+  /**
+   * Advanced Adaptation: Compress content for low bandwidth
+   */
+  async compressContent(request: LowBandwidthRequest): Promise<LowBandwidthResponse> {
+    return this.advancedAdaptationModelsService.compressContent(request);
+  }
+
+  /**
+   * Advanced Adaptation: Adapt content based on user behavior
+   */
+  async adaptContent(request: BehavioralAdaptationRequest): Promise<BehavioralAdaptationResponse> {
+    return this.advancedAdaptationModelsService.adaptContent(request);
+  }
 }
 
 // Export all types and classes
 export * from './visual-learning-model';
 export * from './assessment-generation-model';
 export * from './tutoring-model';
-export * from '../accessibility-models'; 
+export * from '../accessibility-models';
+export * from '../engagement-models';
+export * from '../advanced-adaptation-models'; 
