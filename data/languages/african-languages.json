@@ -80,6 +80,159 @@
       "countries": ["South Africa"],
       "script": "Latin",
       "direction": "ltr"
+    },
+    {
+      "code": "ba",
+      "name": "Baoulé",
+      "nativeName": "Wawle",
+      "region": "West Africa",
+      "countries": ["Côte d'Ivoire"],
+      "script": "Latin",
+      "direction": "ltr"
+    },
+    {
+      "code": "dyu",
+      "name": "Dioula",
+      "nativeName": "Julakan",
+      "region": "West Africa",
+      "countries": ["Côte d'Ivoire", "Mali", "Burkina Faso", "Guinea"],
+      "script": "Latin",
+      "direction": "ltr"
+    },
+    {
+      "code": "bet",
+      "name": "Bété",
+      "nativeName": "Bété",
+      "region": "West Africa",
+      "countries": ["Côte d'Ivoire"],
+      "script": "Latin",
+      "direction": "ltr"
+    },
+    {
+      "code": "sen",
+      "name": "Senoufo",
+      "nativeName": "Sénoufo",
+      "region": "West Africa",
+      "countries": ["Côte d'Ivoire", "Mali", "Burkina Faso"],
+      "script": "Latin",
+      "direction": "ltr"
+    },
+    {
+      "code": "ff",
+      "name": "Fula",
+      "nativeName": "Fulfulde",
+      "region": "West Africa",
+      "countries": ["Senegal", "Mali", "Guinea", "Burkina Faso", "Niger", "Nigeria", "Cameroon"],
+      "script": "Latin",
+      "direction": "ltr"
+    },
+    {
+      "code": "wo",
+      "name": "Wolof",
+      "nativeName": "Wolof",
+      "region": "West Africa",
+      "countries": ["Senegal", "Gambia", "Mauritania"],
+      "script": "Latin",
+      "direction": "ltr"
+    },
+    {
+      "code": "bm",
+      "name": "Bambara",
+      "nativeName": "Bamanankan",
+      "region": "West Africa",
+      "countries": ["Mali", "Burkina Faso", "Côte d'Ivoire"],
+      "script": "Latin",
+      "direction": "ltr"
+    },
+    {
+      "code": "ee",
+      "name": "Ewe",
+      "nativeName": "Eʋegbe",
+      "region": "West Africa",
+      "countries": ["Ghana", "Togo", "Benin"],
+      "script": "Latin",
+      "direction": "ltr"
+    },
+    {
+      "code": "tw",
+      "name": "Twi",
+      "nativeName": "Twi",
+      "region": "West Africa",
+      "countries": ["Ghana", "Côte d'Ivoire"],
+      "script": "Latin",
+      "direction": "ltr"
+    },
+    {
+      "code": "ga",
+      "name": "Ga",
+      "nativeName": "Ga",
+      "region": "West Africa",
+      "countries": ["Ghana"],
+      "script": "Latin",
+      "direction": "ltr"
+    },
+    {
+      "code": "dag",
+      "name": "Dagbani",
+      "nativeName": "Dagbanli",
+      "region": "West Africa",
+      "countries": ["Ghana"],
+      "script": "Latin",
+      "direction": "ltr"
+    },
+    {
+      "code": "mos",
+      "name": "Mossi",
+      "nativeName": "Mòoré",
+      "region": "West Africa",
+      "countries": ["Burkina Faso", "Mali", "Togo"],
+      "script": "Latin",
+      "direction": "ltr"
+    },
+    {
+      "code": "son",
+      "name": "Songhai",
+      "nativeName": "Soŋay",
+      "region": "West Africa",
+      "countries": ["Mali", "Niger", "Burkina Faso", "Nigeria"],
+      "script": "Latin",
+      "direction": "ltr"
+    },
+    {
+      "code": "zgh",
+      "name": "Tamazight",
+      "nativeName": "ⵜⴰⵎⴰⵣⵉⵖⵜ",
+      "region": "West Africa",
+      "countries": ["Morocco", "Algeria", "Mali", "Niger"],
+      "script": "Tifinagh",
+      "direction": "ltr"
+    },
+    {
+      "code": "kab",
+      "name": "Kabyle",
+      "nativeName": "Taqbaylit",
+      "region": "West Africa",
+      "countries": ["Algeria", "Morocco"],
+      "script": "Latin",
+      "direction": "ltr"
+    },
+    {
+      "code": "fon",
+      "name": "Fon",
+      "nativeName": "Fɔ̀ngbè",
+      "region": "West Africa",
+      "countries": ["Benin", "Togo", "Nigeria"],
+      "script": "Latin",
+      "direction": "ltr"
+    },
+    {
+      "code": "gba",
+      "name": "Gbaya",
+      "nativeName": "Gbaya",
+      "region": "West Africa",
+      "countries": ["Central African Republic", "Cameroon", "Nigeria"],
+      "script": "Latin",
+      "direction": "ltr"
     }
   ],
   "codeSwitching": {
@@ -106,6 +259,166 @@
         "Thank you (Na gode)",
         "Good morning (Barka da safiya)"
       ]
+    },
+    "fr-ba": {
+      "description": "French-Baoulé code switching",
+      "commonPatterns": [
+        "Bonjour, comment allez-vous? (Akwaba, wo wɔn?)",
+        "Merci beaucoup (Akae)",
+        "Bonne journée (N'da wo)"
+      ]
+    },
+    "fr-dyu": {
+      "description": "French-Dioula code switching",
+      "commonPatterns": [
+        "Bonjour, comment allez-vous? (I ni sogoma, i be di?",
+        "Merci beaucoup (I ni ce)",
+        "Bonne journée (I ni tilenna)"
+      ]
+    },
+    "fr-bet": {
+      "description": "French-Bété code switching",
+      "commonPatterns": [
+        "Bonjour, comment allez-vous? (Glo, wo kɛ?",
+        "Merci beaucoup (Glo)",
+        "Bonne journée (Glo wo)"
+      ]
+    },
+    "fr-sen": {
+      "description": "French-Senoufo code switching",
+      "commonPatterns": [
+        "Bonjour, comment allez-vous? (Yɛɛ, i yɛɛ?",
+        "Merci beaucoup (Yɛɛ)",
+        "Bonne journée (Yɛɛ wo)"
+      ]
+    },
+    "en-ff": {
+      "description": "English-Fula code switching",
+      "commonPatterns": [
+        "Hello, how are you? (Jam na?",
+        "Thank you (Jaraama)",
+        "Good morning (Jam waali)"
+      ]
+    },
+    "fr-ff": {
+      "description": "French-Fula code switching",
+      "commonPatterns": [
+        "Bonjour, comment allez-vous? (Jam na?",
+        "Merci beaucoup (Jaraama)",
+        "Bonne journée (Jam waali)"
+      ]
+    },
+    "en-wo": {
+      "description": "English-Wolof code switching",
+      "commonPatterns": [
+        "Hello, how are you? (Salamalekum, na nga def?",
+        "Thank you (Jerejef)",
+        "Good morning (Salamalekum)"
+      ]
+    },
+    "fr-wo": {
+      "description": "French-Wolof code switching",
+      "commonPatterns": [
+        "Bonjour, comment allez-vous? (Salamalekum, na nga def?",
+        "Merci beaucoup (Jerejef)",
+        "Bonne journée (Salamalekum)"
+      ]
+    },
+    "en-bm": {
+      "description": "English-Bambara code switching",
+      "commonPatterns": [
+        "Hello, how are you? (I ni sogoma, i be di?",
+        "Thank you (I ni ce)",
+        "Good morning (I ni sogoma)"
+      ]
+    },
+    "fr-bm": {
+      "description": "French-Bambara code switching",
+      "commonPatterns": [
+        "Bonjour, comment allez-vous? (I ni sogoma, i be di?",
+        "Merci beaucoup (I ni ce)",
+        "Bonne journée (I ni sogoma)"
+      ]
+    },
+    "en-ee": {
+      "description": "English-Ewe code switching",
+      "commonPatterns": [
+        "Hello, how are you? (Woézo, efoa?",
+        "Thank you (Akpe)",
+        "Good morning (Woézo)"
+      ]
+    },
+    "en-tw": {
+      "description": "English-Twi code switching",
+      "commonPatterns": [
+        "Hello, how are you? (Akwaba, wo ho te sɛn?",
+        "Thank you (Meda wo ase)",
+        "Good morning (Maakye)"
+      ]
+    },
+    "en-ga": {
+      "description": "English-Ga code switching",
+      "commonPatterns": [
+        "Hello, how are you? (Miihe, wo ni?",
+        "Thank you (Oyiwaadang)",
+        "Good morning (Miihe)"
+      ]
+    },
+    "en-dag": {
+      "description": "English-Dagbani code switching",
+      "commonPatterns": [
+        "Hello, how are you? (Dasiba, be ni?",
+        "Thank you (Tuma)",
+        "Good morning (Dasiba)"
+      ]
+    },
+    "fr-mos": {
+      "description": "French-Mossi code switching",
+      "commonPatterns": [
+        "Bonjour, comment allez-vous? (Ne y yaaogo, yaa?",
+        "Merci beaucoup (Barka)",
+        "Bonne journée (Ne y yaaogo)"
+      ]
+    },
+    "fr-son": {
+      "description": "French-Songhai code switching",
+      "commonPatterns": [
+        "Bonjour, comment allez-vous? (Fofo, mana?",
+        "Merci beaucoup (Barka)",
+        "Bonne journée (Fofo)"
+      ]
+    },
+    "ar-zgh": {
+      "description": "Arabic-Tamazight code switching",
+      "commonPatterns": [
+        "مرحبا، كيف حالك؟ (Azul, mani?",
+        "شكرا لك (Tanemmirt)",
+        "صباح الخير (Azul)"
+      ]
+    },
+    "fr-kab": {
+      "description": "French-Kabyle code switching",
+      "commonPatterns": [
+        "Bonjour, comment allez-vous? (Azul, mani?",
+        "Merci beaucoup (Tanemmirt)",
+        "Bonne journée (Azul)"
+      ]
+    },
+    "en-fon": {
+      "description": "English-Fon code switching",
+      "commonPatterns": [
+        "Hello, how are you? (Kúdó, wè é?",
+        "Thank you (Akpé)",
+        "Good morning (Kúdó)"
+      ]
+    },
+    "fr-fon": {
+      "description": "French-Fon code switching",
+      "commonPatterns": [
+        "Bonjour, comment allez-vous? (Kúdó, wè é?",
+        "Merci beaucoup (Akpé)",
+        "Bonne journée (Kúdó)"
+      ]
     }
   },
   "localization": {
@@ -118,7 +431,24 @@
       "ig": "DD/MM/YYYY",
       "ha": "DD/MM/YYYY",
       "zu": "DD/MM/YYYY",
-      "xh": "DD/MM/YYYY"
+      "xh": "DD/MM/YYYY",
+      "ba": "DD/MM/YYYY",
+      "dyu": "DD/MM/YYYY",
+      "bet": "DD/MM/YYYY",
+      "sen": "DD/MM/YYYY",
+      "ff": "DD/MM/YYYY",
+      "wo": "DD/MM/YYYY",
+      "bm": "DD/MM/YYYY",
+      "ee": "DD/MM/YYYY",
+      "tw": "DD/MM/YYYY",
+      "ga": "DD/MM/YYYY",
+      "dag": "DD/MM/YYYY",
+      "mos": "DD/MM/YYYY",
+      "son": "DD/MM/YYYY",
+      "zgh": "DD/MM/YYYY",
+      "kab": "DD/MM/YYYY",
+      "fon": "DD/MM/YYYY",
+      "gba": "DD/MM/YYYY"
     },
     "numberFormats": {
       "en": "1,234.56",
@@ -129,7 +459,24 @@
       "ig": "1,234.56",
       "ha": "1,234.56",
       "zu": "1,234.56",
-      "xh": "1,234.56"
+      "xh": "1,234.56",
+      "ba": "1 234,56",
+      "dyu": "1 234,56",
+      "bet": "1 234,56",
+      "sen": "1 234,56",
+      "ff": "1 234,56",
+      "wo": "1 234,56",
+      "bm": "1 234,56",
+      "ee": "1 234,56",
+      "tw": "1 234,56",
+      "ga": "1 234,56",
+      "dag": "1 234,56",
+      "mos": "1 234,56",
+      "son": "1 234,56",
+      "zgh": "١٬٢٣٤٫٥٦",
+      "kab": "1 234,56",
+      "fon": "1 234,56",
+      "gba": "1 234,56"
     }
   }
 } 

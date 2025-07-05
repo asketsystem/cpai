@@ -1,5 +1,6 @@
 import { ContextualEngine, ContextualData } from './contextual-engine';
 import { PersonalEngine, PersonalData } from './personal-engine';
+import { LanguageModelService, LanguageModelResponse, CodeSwitchingResponse } from './language-model-service';
 
 export interface AIResponse {
   content: string;
@@ -23,10 +24,12 @@ export interface LearningSession {
 export class AIEngine {
   private contextualEngine: ContextualEngine;
   private personalEngine: PersonalEngine;
+  private languageModelService: LanguageModelService;
 
   constructor() {
     this.contextualEngine = new ContextualEngine();
     this.personalEngine = new PersonalEngine();
+    this.languageModelService = new LanguageModelService();
   }
 
   async generateResponse(
@@ -92,9 +95,6 @@ export class AIEngine {
     contextualAnalysis: any,
     personalAnalysis: any
   ): Promise<string> {
-    // This would integrate with actual AI models (OpenAI, etc.)
-    // For now, return a contextualized template response
-    
     const context = this.contextualEngine.getContext();
     const personal = this.personalEngine.getPersonalData();
     
@@ -102,7 +102,35 @@ export class AIEngine {
       return 'I understand you\'re asking about: ' + userInput;
     }
 
-    // Create a contextualized response based on location, culture, and personal needs
+    // Get optimal language model for the user's context
+    const optimalModel = this.languageModelService.getOptimalLanguageModel(
+      personal.preferences.language,
+      context.location.country,
+      personal.profile.occupation
+    );
+
+    if (optimalModel) {
+      try {
+        // Generate response using the fine-tuned language model
+        const languageResponse = await this.languageModelService.generateContent(
+          userInput,
+          optimalModel.code,
+          {
+            location: context.location.country,
+            timeOfDay: context.environment.timeOfDay,
+            offlineMode: contextualAnalysis.adaptations.offlineMode,
+            lowBandwidth: contextualAnalysis.adaptations.lowBandwidth,
+            mobileDevice: context.device.type === 'mobile'
+          }
+        );
+
+        return languageResponse.content;
+      } catch (error) {
+        console.warn('Language model not available, falling back to default response');
+      }
+    }
+
+    // Fallback to default contextualized response
     let response = `Based on your context in ${context.location.country} and your ${personal.learning.style} learning style, `;
     
     if (contextualAnalysis.adaptations.offlineMode) {
@@ -220,6 +248,83 @@ export class AIEngine {
     format: string;
   } {
     return this.personalEngine.getAdaptiveRecommendations();
+  }
+
+  /**
+   * Generate content in a specific West African language
+   */
+  async generateLanguageContent(
+    prompt: string,
+    languageCode: string,
+    context?: Partial<ContextualData>
+  ): Promise<LanguageModelResponse> {
+    if (context) {
+      this.contextualEngine.updateContext(context);
+    }
+
+    const contextualAnalysis = this.contextualEngine.analyzeContext();
+    
+          return await this.languageModelService.generateContent(
+        prompt,
+        languageCode,
+        {
+          location: context?.location?.country || 'Unknown',
+          timeOfDay: context?.environment?.timeOfDay || 'afternoon',
+          offlineMode: contextualAnalysis.adaptations['offlineMode'],
+          lowBandwidth: contextualAnalysis.adaptations['lowBandwidth'],
+          mobileDevice: context?.device?.type === 'mobile'
+        }
+      );
+  }
+
+  /**
+   * Handle code-switching between languages
+   */
+  async handleCodeSwitching(
+    input: string,
+    primaryLanguage: string,
+    secondaryLanguage: string,
+    context?: Partial<ContextualData>
+  ): Promise<CodeSwitchingResponse> {
+    if (context) {
+      this.contextualEngine.updateContext(context);
+    }
+
+    const contextualAnalysis = this.contextualEngine.analyzeContext();
+    
+    return await this.languageModelService.handleCodeSwitching(
+      input,
+      primaryLanguage,
+      secondaryLanguage,
+      {
+        location: context?.location?.country || 'Unknown',
+        timeOfDay: context?.environment?.timeOfDay || 'afternoon',
+        offlineMode: contextualAnalysis.adaptations['offlineMode'],
+        lowBandwidth: contextualAnalysis.adaptations['lowBandwidth'],
+        mobileDevice: context?.device?.type === 'mobile'
+      }
+    );
+  }
+
+  /**
+   * Get available language models for a location
+   */
+  getAvailableLanguages(location: string): any[] {
+    return this.languageModelService.getModelsByLocation(location);
+  }
+
+  /**
+   * Get language model statistics
+   */
+  getLanguageModelStats(): any {
+    return this.languageModelService.getModelStatistics();
+  }
+
+  /**
+   * Get high-priority languages for development
+   */
+  getHighPriorityLanguages(): any[] {
+    return this.languageModelService.getHighPriorityModels();
   }
 
   private generateSessionId(): string {
