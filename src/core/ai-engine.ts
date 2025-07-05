@@ -1,6 +1,7 @@
 import { ContextualEngine, ContextualData } from './contextual-engine';
 import { PersonalEngine, PersonalData } from './personal-engine';
 import { LanguageModelService, LanguageModelResponse, CodeSwitchingResponse } from './language-model-service';
+import { LearningModelsService, IntegratedLearningRequest, IntegratedLearningResponse, LearningModelsConfig } from './learning-models';
 
 export interface AIResponse {
   content: string;
@@ -25,11 +26,22 @@ export class AIEngine {
   private contextualEngine: ContextualEngine;
   private personalEngine: PersonalEngine;
   private languageModelService: LanguageModelService;
+  private learningModelsService: LearningModelsService;
 
   constructor() {
     this.contextualEngine = new ContextualEngine();
     this.personalEngine = new PersonalEngine();
     this.languageModelService = new LanguageModelService();
+    
+    // Initialize learning models service with default configuration
+    const learningConfig: LearningModelsConfig = {
+      enableVisualLearning: true,
+      enableAssessmentGeneration: true,
+      enableTutoring: true,
+      defaultLanguage: 'en',
+      culturalContext: 'West African'
+    };
+    this.learningModelsService = new LearningModelsService(learningConfig);
   }
 
   async generateResponse(
@@ -325,6 +337,85 @@ export class AIEngine {
    */
   getHighPriorityLanguages(): any[] {
     return this.languageModelService.getHighPriorityModels();
+  }
+
+  /**
+   * Generate integrated learning content using Phase 1 models
+   */
+  async generateIntegratedLearning(
+    topic: string,
+    learningObjective: 'understand' | 'practice' | 'assess' | 'review',
+    userId: string,
+    context?: Partial<ContextualData>,
+    personal?: Partial<PersonalData>
+  ): Promise<IntegratedLearningResponse> {
+    // Update engines with current context and personal data
+    if (context) {
+      this.contextualEngine.updateContext(context);
+    }
+    if (personal) {
+      this.personalEngine.updatePersonalData(personal);
+    }
+
+    const currentContext = this.contextualEngine.getContext();
+    const currentPersonal = this.personalEngine.getPersonalData();
+
+    if (!currentContext || !currentPersonal) {
+      throw new Error('Unable to generate learning content: missing context or personal data');
+    }
+
+    // Create integrated learning request
+    const request: IntegratedLearningRequest = {
+      topic,
+      learningObjective,
+      userContext: {
+        userId,
+        currentLevel: currentPersonal.learning.difficulty || 'beginner',
+        learningStyle: currentPersonal.learning.style || 'visual',
+        progress: 0, // Will be tracked separately
+        strengths: [], // Will be populated from learning analytics
+        weaknesses: [] // Will be populated from learning analytics
+      },
+      context: {
+        location: currentContext.location.country || 'Unknown',
+        culturalContext: currentContext.environment.culturalContext || 'West African',
+        language: currentPersonal.preferences.language || 'en',
+        deviceType: currentContext.device.type || 'desktop',
+        bandwidth: currentContext.connectivity.speed || 'medium',
+        timeAvailable: 30 // Default 30 minutes
+      },
+      preferences: {
+        includeVisuals: currentPersonal.learning.style === 'visual',
+        includeAssessments: true,
+        includeTutoring: true,
+        detailLevel: 'moderate',
+        responseStyle: 'guided'
+      }
+    };
+
+    // Generate integrated learning content
+    return await this.learningModelsService.generateIntegratedLearning(request);
+  }
+
+  /**
+   * Get learning models statistics
+   */
+  getLearningModelsStats(): any {
+    return this.learningModelsService.getModelStatistics();
+  }
+
+  /**
+   * Update learning models configuration
+   */
+  updateLearningModelsConfig(config: Partial<LearningModelsConfig>): void {
+    this.learningModelsService.updateConfig(config);
+  }
+
+  /**
+   * Get current learning models configuration
+   */
+  getLearningModelsConfig(): LearningModelsConfig {
+    return this.learningModelsService.getConfig();
   }
 
   private generateSessionId(): string {
