@@ -12,18 +12,16 @@ export default function CTASection() {
           <button className="px-8 py-3 bg-white text-blue-700 font-bold rounded-lg shadow hover:bg-blue-100 transition">Sign Up Free</button>
           <button className="px-8 py-3 border border-white text-white font-bold rounded-lg hover:bg-white hover:text-blue-700 transition">Sign In</button>
         </div>
-        {/* Chat UI Illustration */}
-        <div className="flex flex-col md:flex-row items-center justify-center gap-6 mt-8">
-          <div className="bg-white rounded-xl shadow-lg p-4 w-64 text-left text-gray-800">
-            <div className="font-semibold mb-2">Help Center</div>
-            <div className="bg-blue-50 rounded p-2 mb-2">How can I help you today?</div>
-            <div className="bg-blue-100 rounded p-2 text-right">I need help with my order.</div>
-          </div>
-          <div className="bg-white rounded-xl shadow-lg p-4 w-64 text-left text-gray-800">
-            <div className="font-semibold mb-2">Products</div>
-            <div className="bg-blue-50 rounded p-2 mb-2">Would you like to see our latest features?</div>
-            <div className="bg-blue-100 rounded p-2 text-right">Yes, show me!</div>
-          </div>
+        {/* Chat UI SVG Illustration */}
+        <div className="flex justify-center mt-12">
+          <svg width="340" height="120" viewBox="0 0 340 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="0" y="0" width="340" height="120" rx="20" fill="#F8FAFC" />
+            <rect x="24" y="24" width="120" height="24" rx="8" fill="#E0E7EF" />
+            <rect x="24" y="56" width="200" height="24" rx="8" fill="#E0E7EF" />
+            <rect x="24" y="88" width="80" height="16" rx="6" fill="#E0E7EF" />
+            <rect x="160" y="24" width="120" height="24" rx="8" fill="#D1FAE5" />
+            <rect x="240" y="56" width="76" height="24" rx="8" fill="#DBEAFE" />
+          </svg>
         </div>
       </div>
       {/* Decorative background */}
